@@ -5,18 +5,21 @@ import Link from "next/link";
 import { useState } from "react";
 import { CircleUserRound, Menu, X } from "lucide-react";
 import mainLogo from "../../../public/main-logo/Logo.png";
+import mainLogo2 from "../../../public/main-logo/Logo2.png";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const navLink = (path:string) => `
+  const navLink = (path: string) => `
     relative
     mx-5
+    lg:text-white
+    text-black
     text-[1rem]
     font-[500]
-    transition-colors
+    transition
     duration-300
     after:content-['']
     after:absolute
@@ -27,14 +30,14 @@ export default function NavBar() {
     after:transition-all
     hover:text-white
     hover:after:w-[50%]
-    ${pathname === path ? "text-white after:w-[50%]" : "text-[#BDBDBD]"}
+    ${pathname === path ? "lg:text-white text-[#BDBDBD] after:w-[50%]" : "lg:text-[#BDBDBD] text-black"}
   `;
 
   return (
-    <nav className="relative flex items-center justify-between bg-[#171D5B] h-[7rem] px-6">
-      {/* Logo */}
-      <Link href="/">
-        <Image alt="logo" src={mainLogo} className="lg:mr-[5rem]" />
+    <nav className="relative flex items-center justify-between md:bg-white lg:bg-[#171D5B] h-[7rem] px-6 z-99">
+      <Link href="/" className="lg:mr-[5rem]">
+        <Image alt="logo" src={mainLogo} className="hidden lg:block" />
+        <Image alt="logo" src={mainLogo2} className="block lg:hidden" />
       </Link>
 
       {/* Desktop Links */}
@@ -70,18 +73,18 @@ export default function NavBar() {
 
       {/* Mobile Menu Button */}
       <div className="md:hidden">
-        <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+        <button onClick={() => setIsOpen(!isOpen)} className="text-black">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       {/* Mobile Links */}
       <div
-        className={`md:hidden absolute top-[7rem] right-0 w-full bg-[#171D5B] transition-all duration-300 ${
+        className={`md:hidden absolute top-[7rem] right-0 w-full bg-white transition-all duration-300 z-99 ${
           isOpen ? "block" : "hidden"
         }`}
       >
-        <ul className="flex flex-col items-center gap-6 py-8">
+        <ul className="flex flex-col items-start gap-6 py-8 text-[1.1rem]">
           <li>
             <Link
               href="/"
@@ -100,6 +103,7 @@ export default function NavBar() {
               المزادات
             </Link>
           </li>
+
           <li>
             <Link
               href="/contact"
@@ -109,10 +113,10 @@ export default function NavBar() {
               تواصل معنا
             </Link>
           </li>
-
+          <hr className="border border-gray-200 w-[80%]" />
           <li>
             <Link href="/login" onClick={() => setIsOpen(false)}>
-              <button className="flex items-center gap-2 text-white border border-white px-6 py-2 rounded-full">
+              <button className="flex items-center gap-2 text-black border border-white px-6 rounded-full">
                 <CircleUserRound size={20} />
                 تسجيل الدخول
               </button>

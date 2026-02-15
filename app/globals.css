@@ -12,3 +12,23 @@ body {
   color: var(--foreground);
   font-family: alexandria, sans-serif;
 }
+::placeholder {
+  color: rgb(168, 168, 168);
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.primary-label {
+  position: relative;
+  color: #171d5b;
+  display: inline-block;
+}
+.primary-label::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  background-color: #eea820;
+  height: 3px;
+  width: 50%;
+}

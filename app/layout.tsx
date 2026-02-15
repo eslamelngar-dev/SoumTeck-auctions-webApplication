@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Alexandria } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/layouts/NavBar";
+import Footer from "./components/layouts/Footer";
 
 const alexandria = Alexandria({
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
       >
         <NavBar />
         {children}
+        <Footer/>
       </body>
     </html>
   );
