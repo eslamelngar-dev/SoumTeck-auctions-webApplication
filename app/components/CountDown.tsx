@@ -84,18 +84,18 @@ export default function Countdown({
   }
 
   return (
-    <div className="flex items-center justify-between w-full text-[#171D5B] rounded-xl px-4 md:px-6 py-2 md:py-3 border-2 border-[#EAEAEA]">
+    <div className="flex flex-row-reverse items-center justify-between w-full text-[#171D5B] rounded-xl px-4 md:px-6 py-2 md:py-3 border-2 border-[#EAEAEA] gap-2">
       <div className="flex flex-col items-center">
         <div className="font-bold text-xl md:text-2xl">{timeLeft.days}</div>
         <span className="text-[0.65rem] md:text-xs text-gray-500">يوم</span>
       </div>
 
-      <span className="text-lg md:text-xl text-gray-300 font-bold">:</span>
+      <span className="text-lg md:text-xl text-gray-300 font-bold items-center">:</span>
 
       <div className="flex flex-col items-center">
         <div className="font-bold text-xl md:text-2xl">
           {timeLeft.hours.toString().padStart(2, "0")}
-        </div>
+        </div>  
         <span className="text-[0.65rem] md:text-xs text-gray-500">ساعة</span>
       </div>
 

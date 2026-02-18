@@ -85,7 +85,7 @@ export default function AssetsTable({
                     سجل في المزاد
                   </Button>
                 </th>
-                <td className="px-6 py-4">
+                <td className="pr-3 pl-1 py-4">
                   <div className="flex gap-3">
                     <div className=" relative w-10 h-10 rounded-full overflow-hidden">
                       <Image
@@ -103,7 +103,7 @@ export default function AssetsTable({
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 gap-1 flex flex-col justify-center items-center">
+                <td className="px-3 py-8 gap-1 flex flex-col justify-center items-center ">
                   <div>
                     <p className="text-[#DC5224] font-bold">
                       {asset.bidPrice}ر.س
@@ -111,32 +111,32 @@ export default function AssetsTable({
                     <p>(300 ر.س) للمتر </p>
                   </div>
                 </td>
-                <td className="px-6 py-4  ">
+                <td className="px-3 py-4  ">
                   <div className="flex justify-center items-center gap-1">
                     <p className="font-bold">{asset.space}</p>
                     <span>م²</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 ">
+                <td className="px-3 py-4 ">
                   <div className="flex justify-center items-center gap-1">
                     <p className="font-bold">{asset.deposit}</p>
                     <span>ر.س</span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-4">
                   <div className="flex gap-1 justify-center items-center">
                     <p className="font-bold">({asset.bidsCount})</p>
                     <span>مزايد</span>
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-8 py-4 max-w-73">
                   <Countdown
                     startDate={asset.startDate}
                     endDate={asset.endDate}
                     setClosed={() => false}
                   />
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-5 py-4">
                   <Link href={`/auctions/details/${asset._id}`}>
                     <button className="bg-[#EEA820] text-white rounded-md text-[0.81rem] w-40 h-12 cursor-pointer hover:bg-[#d99518] transition">
                       تفاصيل المزاد
