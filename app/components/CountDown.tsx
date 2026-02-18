@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 interface CountdownProps {
   startDate: string;
   endDate: string;
-  setClosed:(value:boolean) => void
+  setClosed: (value: boolean) => void;
 }
 
-export default function Countdown({ endDate, startDate,setClosed }: CountdownProps) {
+export default function Countdown({
+  endDate,
+  startDate,
+  setClosed,
+}: CountdownProps) {
   const upcoming = new Date().getTime() < new Date(startDate).getTime();
   const upcomingDate = new Date(startDate);
   let hours = upcomingDate.getHours();
@@ -34,56 +38,83 @@ export default function Countdown({ endDate, startDate,setClosed }: CountdownPro
     }, 1000);
 
     return () => clearInterval(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if(!timeLeft) {
-      setClosed(true)
+    if (!timeLeft) {
+      setClosed(true);
     }
-  },[timeLeft,setClosed])
+  }, [timeLeft, setClosed]);
 
   if (!timeLeft) {
-    return <div className="text-white bg-[#DC5224] h-[2.8rem] w-full flex items-center justify-center text-[0.7rem]"><p>تم اغلاق المزاد</p></div>;
-  } else if (upcoming) {
     return (
-      <div className="flex justify-around border border-gray-200 text-[#171D5B] w-full rounded-lg text-[0.68rem] text-center">
-        <div className="flex-col justify-center items-center">
-          <p>تاريخ فتح المزاد</p>
-          <p className="font-bold">{`
-          ${upcomingDate.getFullYear()} / ${upcomingDate.getMonth() + 1} / ${upcomingDate.getDate()}
-        `}</p>
+      <div className="text-white bg-[#DC5224] h-11 md:h-12 w-full flex items-center justify-center text-sm md:text-base font-semibold rounded-lg">
+        <p>تم اغلاق المزاد</p>
+      </div>
+    );
+  }
+
+  if (upcoming) {
+    return (
+      <div className="flex flex-row justify-around items-center gap-4 border border-gray-200 text-[#171D5B] w-full rounded-lg text-center p-3 md:p-4">
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-[0.7rem] md:text-sm text-gray-500">
+            تاريخ فتح المزاد
+          </p>
+          <p className="font-bold text-sm md:text-base">
+            {`${upcomingDate.getFullYear()} / ${
+              upcomingDate.getMonth() + 1
+            } / ${upcomingDate.getDate()}`}
+          </p>
         </div>
-        <div className="flex-col justify-center items-center">
-          <p>وقت فتح المزاد</p>
-          <p className="font-bold">{`
-            ${hours}:${minutes.toString().padStart(2, "0")}
-          `}</p>
+
+        <div className="w-px h-10 bg-gray-200"></div>
+
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-[0.7rem] md:text-sm text-gray-500">
+            وقت فتح المزاد
+          </p>
+          <p className="font-bold text-sm md:text-base">
+            {`${hours}:${minutes.toString().padStart(2, "0")}`}
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex gap-4 text-sm w-full  text-[#171D5B] rounded-xl px-7  border-2 border-[#EAEAEA]">
-      <div className="w-full">
-        <div className="font-semibold text-2xl ">{timeLeft.seconds}</div>
-        <span className="text-[0.7rem] font-light ">ثانية</span>
+    <div className="flex items-center justify-between w-full text-[#171D5B] rounded-xl px-4 md:px-6 py-2 md:py-3 border-2 border-[#EAEAEA]">
+      <div className="flex flex-col items-center">
+        <div className="font-bold text-xl md:text-2xl">{timeLeft.days}</div>
+        <span className="text-[0.65rem] md:text-xs text-gray-500">يوم</span>
       </div>
-      <span className="text-xl">:</span>
-    <div className="w-full">
-        <div className="font-semibold text-2xl">{timeLeft.minutes}</div>
-        <span className="text-[0.7rem] font-light">دقيقة</span>
+
+      <span className="text-lg md:text-xl text-gray-300 font-bold">:</span>
+
+      <div className="flex flex-col items-center">
+        <div className="font-bold text-xl md:text-2xl">
+          {timeLeft.hours.toString().padStart(2, "0")}
+        </div>
+        <span className="text-[0.65rem] md:text-xs text-gray-500">ساعة</span>
       </div>
-      <span className="text-xl">:</span>
-      <div className="w-full">  
-        <div className="font-semibold text-2xl">{timeLeft.hours}</div>
-        <span className="text-[0.7rem] font-light">ساعة</span>
+
+      <span className="text-lg md:text-xl text-gray-300 font-bold">:</span>
+
+      <div className="flex flex-col items-center">
+        <div className="font-bold text-xl md:text-2xl">
+          {timeLeft.minutes.toString().padStart(2, "0")}
+        </div>
+        <span className="text-[0.65rem] md:text-xs text-gray-500">دقيقة</span>
       </div>
-      <span className="text-xl">:</span>
-      <div className="w-full">  
-        <div className="font-semibold text-2xl">{timeLeft.days}</div>
-        <span className="text-[0.7rem] font-light">يوم</span>
+
+      <span className="text-lg md:text-xl text-gray-300 font-bold">:</span>
+
+      <div className="flex flex-col items-center">
+        <div className="font-bold text-xl md:text-2xl">
+          {timeLeft.seconds.toString().padStart(2, "0")}
+        </div>
+        <span className="text-[0.65rem] md:text-xs text-gray-500">ثانية</span>
       </div>
     </div>
   );

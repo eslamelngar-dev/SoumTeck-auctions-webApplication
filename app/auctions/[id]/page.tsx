@@ -108,8 +108,8 @@ export default function AuctionsPage() {
         <div className="my-3 w-full flex justify-center">
           <div className="show-options"></div>
         </div>
-        <Container maxWidth="xl">
-          <Grid container spacing={2}>
+        <Container maxWidth="xl" sx={{display:"flex", alignItems:"center"}}>
+          <Grid container spacing={2} >
             {Assets.length === 0 ? (
               <Grid
                 size={12}
