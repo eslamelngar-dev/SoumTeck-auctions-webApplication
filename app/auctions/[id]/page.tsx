@@ -7,14 +7,16 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { auctions } from "@/app/data/auctions";
 import AssetsTable from "../../components/sections/auctionDetails/Table";
+import AssetsCards from "@/app/components/UI/AssetsCards";
 
 export default function AuctionsPage() {
   const params = useParams();
   const auctionId = params.id;
   const auction = auctions.find((a) => a._id === auctionId);
   const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [showMode, setshowMode] = useState("table");
   const [page, setPage] = useState(1);
-  
+
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const totalPages = Math.ceil(Assets.length / itemsPerPage);
@@ -30,51 +32,81 @@ export default function AuctionsPage() {
         }}
         className="py-4 mt-10"
       >
-        <div className="flex justify w-full">
+        <div className="flex justify-center lg:justify-start w-full">
           <p className=" primary-label text-[2.5rem] font-bold">المزادات</p>
         </div>
-        <div className="bg-[#F3F4F6] flex w-screen justify-between py-10 mt-2">
-          <div className="px-[4.81rem]">
-            <div className="flex gap-1 text-[1.53rem] text-[#171D5B] mt-auto mb-4">
-              <span>مزاد</span>
-              <p>{auction?.name}</p>
-            </div>
-            <div className="flex gap-1 text-[1.53rem]">
-              <GavelIcon sx={{ color: "#EEA820" }} />
-              <p className="text-[#171D5B] text-[1.53rem]">عدد الاصول </p>
+        <div className="bg-[#F3F4F6] w-screen py-1 lg:py-8 mt-2 ">
+          <div className="max-w-350 mx-auto px-4 sm:px-6 md:px-10">
+            <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-1 lg:gap-8">
+              <div>
+                <div className="flex gap-1 text-xl sm:text-2xl md:text-3xl text-[#171D5B] mb-4">
+                  <span>مزاد</span>
+                  <p>{auction?.name}</p>
+                </div>
 
-              <span className="text-[#DC5224]">({Assets.length})</span>
-            </div>
-          </div>
-          <div className="flex px-[4.81rem]">
-            <div className="relative w-[40%] sm:w-[45%] lg:w-62 h-12 sm:h-16 lg:h-22 flex justify-center items-center gap-3">
-              
-              <div className="relative w-1/2 h-32">
+                <div className="flex gap-2 items-center text-base sm:text-lg md:text-xl">
+                  <GavelIcon sx={{ color: "#EEA820" }} />
+                  <p className="text-[#171D5B]">عدد الاصول</p>
+                  <span className="text-[#DC5224]">({Assets.length})</span>
+                </div>
+              </div>
+              {/* Logos */}
+              <div className="flex gap-6 items-center">
                 {auction?.image && (
+                  <div className="relative w-24 sm:w-28 md:w-32 h-16 sm:h-20">
+                    <Image
+                      src={auction.image}
+                      alt="auction logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                )}
+
+                <div className="relative w-24 sm:w-28 md:w-32 h-16 sm:h-20">
                   <Image
-                    src={auction.image}
-                    alt="overlay1 hero img"
+                    src="/Companys-logos/infath-logo.png"
+                    alt="company logo"
                     fill
                     className="object-contain"
                   />
-                )}
-              </div>
-              <div className="relative w-1/2 h-32">
-                <Image
-                  src="/Companys-logos/infath-logo.png"
-                  alt="overlay1 hero img"
-                  fill
-                  className="object-contain"
-                />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="my-8 w-full flex justify-center">
-          <div className="show-options">
+        <div className="hidden lg:flex gap-3 py-5 w-full lg:justify-start">
+          <button
+            onClick={() => {
+              setshowMode("table");
+              setItemsPerPage(12);
+            }}
+            className={`px-6 h-11 rounded-lg border transition font-medium
+      ${
+        showMode === "table"
+          ? "bg-[#171D5B] text-white border-[#171D5B]"
+          : "bg-white text-[#667085] border-[#D0D5DD] hover:bg-gray-50"
+      }`}
+          >
+            جدول
+          </button>
 
-          </div>
+          <button
+            onClick={() => setshowMode("cards")}
+            className={`px-6 h-11 rounded-lg border transition font-medium
+      ${
+        showMode === "cards"
+          ? "bg-[#171D5B] text-white border-[#171D5B]"
+          : "bg-white text-[#667085] border-[#D0D5DD] hover:bg-gray-50"
+      }`}
+          >
+            بطاقات
+          </button>
+        </div>
+
+        <div className="my-3 w-full flex justify-center">
+          <div className="show-options"></div>
         </div>
         <Container maxWidth="xl">
           <Grid container spacing={2}>
@@ -93,7 +125,10 @@ export default function AuctionsPage() {
                 <p>لا يوجداصول </p>
               </Grid>
             ) : (
-              <AssetsTable startIndex={startIndex} endIndex={endIndex} setItemsPerPage={setItemsPerPage}/>
+              showMode === "table"
+              ? <AssetsTable startIndex={startIndex} endIndex={endIndex} />
+              : <AssetsCards startIndex={startIndex} endIndex={endIndex} />
+              
             )}
           </Grid>
         </Container>

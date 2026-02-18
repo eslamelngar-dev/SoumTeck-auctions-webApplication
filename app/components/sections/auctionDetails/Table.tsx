@@ -3,22 +3,16 @@ import CheckIcon from "@mui/icons-material/Check";
 import Countdown from "@/app/components/CountDown";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@mui/material";
 import { Assets } from "@/app/data/assets";
 
 type AssetsTableProps = {
     startIndex: number;
     endIndex: number;
-    setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
   };
-export default function AssetsTable({startIndex,endIndex,setItemsPerPage}:AssetsTableProps) {
+export default function AssetsTable({startIndex,endIndex}:AssetsTableProps) {
   const [clicked, setClicked] = useState(false);
-  useEffect(() => {
-    setItemsPerPage(12)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-
   function handleButtonClick() {
     setClicked((prev) => !prev);
   }

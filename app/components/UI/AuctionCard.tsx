@@ -21,7 +21,7 @@ export default function AuctionCard({
 
   return (
     <>
-      <div className="mt-5 bg-neutral-primary-soft block w-[20.18rem] h-112 p-3 rounded-xl shadow-2xl border border-gray-100">
+      <div className="mt-5 block w-[20.18rem] h-112 p-3 rounded-xl shadow-2xl border border-gray-100">
         <a href="#" className="relative flex justify-center">
           <Image
             className={`rounded-xl cursor-default`}
@@ -63,7 +63,7 @@ export default function AuctionCard({
           <RulerDimensionLine color="#EEA820" size={20} />
           <p className="mb-6 text-[12px]">{"325.22م²"}</p>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center items-center">
           <Countdown
             endDate={endDate}
             startDate={startDate}
