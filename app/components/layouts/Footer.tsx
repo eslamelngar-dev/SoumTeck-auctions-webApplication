@@ -36,7 +36,7 @@ export default function Footer() {
         {/* Main Menu */}
         <div>
           <h6 className="primary-label mb-8 font-bold">القائمة الرئيسية</h6>
-          <div className="text-[#757575] flex flex-col gap-5 text-sm">
+          <div className="text-[#757575] flex flex-col gap-5 text-sm lg:items-start">
             <button>الضوابط الإعلانية الصادرة من الهيئة</button>
             <button>الشروط والأحكام</button>
             <button>ترخيص الهيئة العامة للعقار</button>
@@ -47,7 +47,7 @@ export default function Footer() {
         {/* Sections */}
         <div>
           <h6 className="primary-label mb-8 font-bold">الأقسام</h6>
-          <div className="text-[#757575] flex flex-col gap-5 text-sm">
+          <div className="text-[#757575] flex flex-col gap-5 text-sm lg:items-start">
             <button>مكتبة الدعم</button>
             <button>الأسئلة الشائعة</button>
           </div>
@@ -56,7 +56,7 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h6 className="primary-label mb-8 font-bold">تواصل معنا</h6>
-          <div className="text-[#757575] flex flex-col gap-5 text-sm">
+          <div className="text-[#757575] flex flex-col gap-5 text-sm ">
             <div className="flex gap-2 items-start">
               <MapPin size={18} />
               <span>الرياض حي الملك فيصل، السعودية</span>

@@ -114,8 +114,8 @@ export default function NavBar() {
             </Link>
           </li>
           <hr className="border border-gray-200 w-[80%]" />
-          <li>
-            <Link href="/login" onClick={() => setIsOpen(false)}>
+          <li className="cursor-pointer">
+            <Link href="/login"  onClick={() => setIsOpen(false)}>
               <button className="flex items-center gap-2 text-black border border-white px-6 rounded-full">
                 <CircleUserRound size={20} />
                 تسجيل الدخول

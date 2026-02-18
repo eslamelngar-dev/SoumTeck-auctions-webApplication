@@ -21,7 +21,7 @@ export default function AuctionCard({
 
   return (
     <>
-      <div className="mt-5 block w-[20.18rem] h-112 p-3 rounded-xl shadow-2xl border border-gray-100">
+      <div className="mt-5 block w-[20.18rem] max-h-150 p-3 rounded-xl shadow-2xl border border-gray-100">
         <a href="#" className="relative flex justify-center">
           <Image
             className={`rounded-xl cursor-default`}
