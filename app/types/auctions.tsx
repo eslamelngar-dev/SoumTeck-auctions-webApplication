@@ -11,4 +11,3 @@ export interface auctionTypes {
     endDate: string,
     assetsCount: number,
 }
-export type AuctionCardProps = Omit<auctionTypes, '_id'> 

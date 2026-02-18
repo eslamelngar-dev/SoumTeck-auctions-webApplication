@@ -29,13 +29,13 @@ export default function Auctions() {
           flexDirection: "column",
           alignItems: "center",
         }}
-        className="py-4 mt-[2.5rem]"
+        className="py-4 mt-10"
       >
         <div className="flex justify-start w-[90%]">
           <p className=" primary-label text-[2.5rem]">المزادات</p>
         </div>
 
-        <div className="mt-[2rem] w-full flex justify-center">
+        <div className="mt-8 w-full flex justify-center">
           <ToggleGroup
             one="القائمة"
             two="القادمة"
@@ -57,6 +57,7 @@ export default function Auctions() {
                 }}
               >
                 <AuctionCard
+                _id={auction._id}
                   name={auction.name}
                   location={auction.location}
                   assetsCount={auction.assetsCount}

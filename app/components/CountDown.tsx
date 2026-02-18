@@ -68,22 +68,22 @@ export default function Countdown({ endDate, startDate,setClosed }: CountdownPro
     <div className="flex gap-4 text-sm  text-[#171D5B] rounded-xl px-7  border-2 border-[#EAEAEA]">
       <div>
         <div className="font-semibold text-2xl">{timeLeft.seconds}</div>
-        <span className="text-[0.7rem] font-[300] ">ثانية</span>
+        <span className="text-[0.7rem] font-light ">ثانية</span>
       </div>
       <span className="text-xl">:</span>
       <div>
         <div className="font-semibold text-2xl">{timeLeft.minutes}</div>
-        <span className="text-[0.7rem] font-[300]">دقيقة</span>
+        <span className="text-[0.7rem] font-light">دقيقة</span>
       </div>
       <span className="text-xl">:</span>
       <div>
         <div className="font-semibold text-2xl">{timeLeft.hours}</div>
-        <span className="text-[0.7rem] font-[300]">ساعة</span>
+        <span className="text-[0.7rem] font-light">ساعة</span>
       </div>
       <span className="text-xl">:</span>
       <div>
         <div className="font-semibold text-2xl">{timeLeft.days}</div>
-        <span className="text-[0.7rem] font-[300]">يوم</span>
+        <span className="text-[0.7rem] font-light">يوم</span>
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import { MapPin, RulerDimensionLine } from "lucide-react";
 import Image from "next/image";
 import Countdown from "../CountDown";
-import { AuctionCardProps } from "../../types/auctions";
+import { auctionTypes } from "../../types/auctions";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function AuctionCard({
+  _id,
   name,
   image,
   location,
@@ -13,12 +15,13 @@ export default function AuctionCard({
   startDate,
   endDate,
   assetsCount,
-}: AuctionCardProps) {
+  
+}: auctionTypes) {
   const [closed, setClosed] = useState(false);
 
   return (
     <>
-      <div className="mt-[1.25rem] bg-neutral-primary-soft block w-[20.18rem] h-[28rem] p-3 rounded-xl shadow-2xl border border-gray-100">
+      <div className="mt-5 bg-neutral-primary-soft block w-[20.18rem] h-112 p-3 rounded-xl shadow-2xl border border-gray-100">
         <a href="#" className="relative flex justify-center">
           <Image
             className={`rounded-xl cursor-default`}
@@ -26,7 +29,7 @@ export default function AuctionCard({
             width={500}
             height={500}
             alt="auction"
-            style={{minHeight:210}}
+            style={{ minHeight: 210 }}
           />
           <div
             className="
@@ -71,7 +74,9 @@ export default function AuctionCard({
         <div className="mt-[0.8rem] flex justify-between">
           {closed ? (
             <div>
-              <p className="text-[0.8rem] text-[#171D5B] font-bold">سعر السوم الحالي</p>
+              <p className="text-[0.8rem] text-[#171D5B] font-bold">
+                سعر السوم الحالي
+              </p>
               <div>
                 <span className="text-[#EEA820] text-[0.9rem]">
                   500,000,000{" "}
@@ -90,10 +95,11 @@ export default function AuctionCard({
               </span>
             </div>
           )}
-
-          <button className="bg-[#EEA820] text-white rounded-md text-[0.81rem] w-[10rem] h-[3rem] cursor-pointer hover:bg-[#d99518] transition">
-            تفاصيل المزاد
-          </button>
+          <Link href={`/auctions/${_id}`}>
+            <button className="bg-[#EEA820] text-white rounded-md text-[0.81rem] w-40 h-12 cursor-pointer hover:bg-[#d99518] transition">
+              تفاصيل المزاد
+            </button>
+          </Link>
         </div>
       </div>
     </>

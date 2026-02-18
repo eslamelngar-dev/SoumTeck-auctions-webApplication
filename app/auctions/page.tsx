@@ -86,18 +86,18 @@ export default function AuctionsPage() {
         <Container maxWidth="xl">
           <Grid container spacing={2}>
             {filteredAuctions.length === 0 ? (
-              <Grid 
-                  size={12}
-                  sx={{
-                    textAlign:"center",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop:"5rem",
-                    color:"gray",
-                    padding:"2rem"
-                  }}
-                >
-                <p>لا يوجد مزادات {" "}</p>
+              <Grid
+                size={12}
+                sx={{
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "5rem",
+                  color: "gray",
+                  padding: "2rem",
+                }}
+              >
+                <p>لا يوجد مزادات </p>
                 <span className="mx-2">
                   {activeTab === "active"
                     ? "قائمة "
@@ -118,6 +118,7 @@ export default function AuctionsPage() {
                   }}
                 >
                   <AuctionCard
+                    _id={auction._id}
                     name={auction.name}
                     location={auction.location}
                     assetsCount={auction.assetsCount}

@@ -22,7 +22,7 @@ export default function Footer() {
                 العديد من النصوص الأخرى إضافة إلى الموقع الالكترونى.
               </p>
               <div className="flex gap-5 mt-5">
-                <button className="border border-[#EAEAEA] p-2 rounded">
+                <button className="border border-[#EAEAEA] p-2 rounded cursor-pointer">
                   <Instagram
                     style={{
                       color: "#9E35A5",
@@ -30,10 +30,10 @@ export default function Footer() {
                     }}
                   />
                 </button>
-                <button className="border border-[#EAEAEA] p-2 rounded">
+                <button className="border border-[#EAEAEA] p-2 rounded cursor-pointer">
                   <XIcon sx={{ color: "black" }} />
                 </button>
-                <button className="border border-[#EAEAEA] p-2 rounded">
+                <button className="border border-[#EAEAEA] p-2 rounded cursor-pointer">
                   <LinkedInIcon sx={{ color: "#0A66C2", fontSize: "1.8rem" }} />
                 </button>
               </div>

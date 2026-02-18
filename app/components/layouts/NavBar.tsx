@@ -34,8 +34,8 @@ export default function NavBar() {
   `;
 
   return (
-    <nav className="relative flex items-center justify-between md:bg-white lg:bg-[#171D5B] h-[7rem] px-6 z-99">
-      <Link href="/" className="lg:mr-[5rem]">
+    <nav className="relative flex items-center justify-between md:bg-white lg:bg-[#171D5B] h-28 px-6 z-99">
+      <Link href="/" className="lg:mr-20">
         <Image alt="logo" src={mainLogo} className="hidden lg:block" />
         <Image alt="logo" src={mainLogo2} className="block lg:hidden" />
       </Link>
@@ -64,7 +64,7 @@ export default function NavBar() {
       {/* Desktop Login */}
       <div className="hidden md:block">
         <Link href="/login">
-          <button className="flex items-center gap-2 text-white ml-[5rem]">
+          <button className="flex items-center gap-2 text-white ml-20">
             <CircleUserRound size={22} />
             تسجيل الدخول
           </button>
@@ -80,7 +80,7 @@ export default function NavBar() {
 
       {/* Mobile Links */}
       <div
-        className={`md:hidden absolute top-[7rem] right-0 w-full bg-white transition-all duration-300 z-99 ${
+        className={`md:hidden absolute top-28 right-0 w-full bg-white transition-all duration-300 z-99 ${
           isOpen ? "block" : "hidden"
         }`}
       >
