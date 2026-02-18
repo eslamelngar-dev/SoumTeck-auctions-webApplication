@@ -11,7 +11,7 @@ export interface auctionTypes {
     endDate: string,
     assetsCount: number,
 }
-export interface AssetsCardsProps extends auctionTypes{
+export interface AssetsCardsProps{
   startIndex:number
   endIndex:number
 }
