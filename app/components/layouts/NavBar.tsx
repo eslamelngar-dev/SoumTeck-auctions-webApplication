@@ -13,25 +13,27 @@ export default function NavBar() {
   const pathname = usePathname();
 
   const navLink = (path: string) => `
-    relative
-    mx-5
-    lg:text-white
-    text-black
-    text-[1rem]
-    font-[500]
-    transition
-    duration-300
-    after:content-['']
-    after:absolute
-    after:right-0
-    after:bottom-[-5px]
-    after:h-[2px]
-    after:bg-[#EEA820]
-    after:transition-all
-    hover:text-white
-    hover:after:w-[50%]
-    ${pathname === path ? "lg:text-white text-[#BDBDBD] after:w-[50%]" : "lg:text-[#BDBDBD] text-black"}
-  `;
+  relative
+  mx-5
+  lg:text-white
+  text-black
+  text-[1rem]
+  font-[500]
+  transition
+  duration-300
+  after:content-['']
+  after:absolute
+  after:right-0
+  after:bottom-[-5px]
+  after:h-[2px]
+  after:w-0
+  after:block
+  after:bg-[#EEA820]
+  after:transition-all
+  hover:text-white
+  hover:after:w-[50%]
+  ${pathname === path ? "lg:text-white text-[#BDBDBD] after:w-[50%]" : "lg:text-[#BDBDBD] text-black"}
+`;
 
   return (
     <nav className="relative flex items-center justify-between md:bg-white lg:bg-[#171D5B] h-28 px-6 z-99">
@@ -64,9 +66,9 @@ export default function NavBar() {
       {/* Desktop Login */}
       <div className="hidden md:block">
         <Link href="/login">
-          <button className="flex items-center gap-2 text-white ml-20">
-            <CircleUserRound size={22} />
-            تسجيل الدخول
+          <button className="flex items-center text-white ml-20 cursor-pointer">
+            <CircleUserRound size={22} style={{ margin: -7 }} />
+            <span className={navLink("/login")}>تسجيل الدخول</span>
           </button>
         </Link>
       </div>
@@ -114,8 +116,8 @@ export default function NavBar() {
             </Link>
           </li>
           <hr className="border border-gray-200 w-[80%]" />
-          <li className="cursor-pointer">
-            <Link href="/login"  onClick={() => setIsOpen(false)}>
+          <li>
+            <Link href="/login" onClick={() => setIsOpen(false)}>
               <button className="flex items-center gap-2 text-black border border-white px-6 rounded-full">
                 <CircleUserRound size={20} />
                 تسجيل الدخول
