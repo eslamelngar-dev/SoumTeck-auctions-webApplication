@@ -103,7 +103,7 @@ export default function AssetsCards({
                     </div>
                   )}
 
-                  <Link href={`/auctions/${asset._id}`}>
+                  <Link href={`/auctions/details/${asset._id}`}>
                     <button className="bg-[#EEA820] text-white rounded-md text-[0.81rem] w-40 h-12 hover:bg-[#d99518] transition cursor-pointer">
                       تفاصيل المزاد
                     </button>

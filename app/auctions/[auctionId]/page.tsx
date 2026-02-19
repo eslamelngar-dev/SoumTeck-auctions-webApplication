@@ -1,16 +1,18 @@
-"use client";
 import { Container, Grid, Pagination } from "@mui/material";
 import { Assets } from "@/app/data/assets";
 import { useState } from "react";
 import GavelIcon from "@mui/icons-material/Gavel";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { auctions } from "@/app/data/auctions";
 import AssetsTable from "../../components/sections/auctionDetails/Table";
 import AssetsCards from "@/app/components/UI/AssetsCards";
 
-export default function AuctionsPage() {
-  const params = useParams();
+interface props {
+  params: {
+    id: string;
+  };
+}
+export default function AuctionsPage({ params }: props) {
   const auctionId = params.id;
   const auction = auctions.find((a) => a._id === auctionId);
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -82,7 +84,7 @@ export default function AuctionsPage() {
               setshowMode("table");
               setItemsPerPage(12);
             }}
-            className={`px-6 h-11 rounded-lg border transition font-medium
+            className={`px-6 h-11 rounded-lg border transition font-medium cursor-pointer
       ${
         showMode === "table"
           ? "bg-[#171D5B] text-white border-[#171D5B]"
@@ -94,7 +96,7 @@ export default function AuctionsPage() {
 
           <button
             onClick={() => setshowMode("cards")}
-            className={`px-6 h-11 rounded-lg border transition font-medium
+            className={`px-6 h-11 rounded-lg border transition font-medium cursor-pointer
       ${
         showMode === "cards"
           ? "bg-[#171D5B] text-white border-[#171D5B]"
@@ -108,8 +110,8 @@ export default function AuctionsPage() {
         <div className="my-3 w-full flex justify-center">
           <div className="show-options"></div>
         </div>
-        <Container maxWidth="xl" sx={{display:"flex", alignItems:"center"}}>
-          <Grid container spacing={2} >
+        <Container maxWidth="xl" sx={{ display: "flex", alignItems: "center" }}>
+          <Grid container spacing={2}>
             {Assets.length === 0 ? (
               <Grid
                 size={12}
@@ -124,11 +126,10 @@ export default function AuctionsPage() {
               >
                 <p>لا يوجداصول </p>
               </Grid>
+            ) : showMode === "table" ? (
+              <AssetsTable startIndex={startIndex} endIndex={endIndex} />
             ) : (
-              showMode === "table"
-              ? <AssetsTable startIndex={startIndex} endIndex={endIndex} />
-              : <AssetsCards startIndex={startIndex} endIndex={endIndex} />
-              
+              <AssetsCards startIndex={startIndex} endIndex={endIndex} />
             )}
           </Grid>
         </Container>
