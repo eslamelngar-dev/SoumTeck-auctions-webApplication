@@ -15,14 +15,15 @@ export interface assetTypes {
   name: string;
   image: string;
   location: string;
-  deposite: number;
+  deposit: number;
   bidPrice: number;
   space: number;
   startDate: string;
   endDate: string;
   bidsCount: number;
 }
-export interface AssetsCardsProps {
+export interface AssetsProps {
   startIndex: number;
   endIndex: number;
+  auctionId:string | undefined
 }

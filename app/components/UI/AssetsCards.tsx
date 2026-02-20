@@ -1,7 +1,7 @@
 import { MapPin, RulerDimensionLine } from "lucide-react";
 import Image from "next/image";
 import Countdown from "../CountDown";
-import { AssetsCardsProps } from "../../types/auctions";
+import { AssetsProps } from "../../types/auctions";
 import { useState } from "react";
 import Link from "next/link";
 import { Assets } from "@/app/data/assets";
@@ -10,8 +10,8 @@ import { Grid } from "@mui/material";
 export default function AssetsCards({
   startIndex,
   endIndex,
-}: AssetsCardsProps) {
-  // استخدام object لتتبع حالة كل كارت بشكل منفصل
+  auctionId,
+}: AssetsProps) {
   const [closedAssets, setClosedAssets] = useState<Record<string, boolean>>({});
 
   const handleSetClosed = (assetId: string, value: boolean) => {
@@ -103,7 +103,7 @@ export default function AssetsCards({
                     </div>
                   )}
 
-                  <Link href={`/auctions/details/${asset._id}`}>
+                  <Link href={`/auctions/${auctionId}/assets/${asset._id}`}>
                     <button className="bg-[#EEA820] text-white rounded-md text-[0.81rem] w-40 h-12 hover:bg-[#d99518] transition cursor-pointer">
                       تفاصيل المزاد
                     </button>
