@@ -1,4 +1,3 @@
-
 "use client";
 import { Container, Grid, Pagination } from "@mui/material";
 import { Assets } from "@/app/data/assets";
@@ -9,6 +8,7 @@ import { auctions } from "@/app/data/auctions";
 import AssetsTable from "@/app/components/sections/auctionDetails/Table";
 import AssetsCards from "@/app/components/UI/AssetsCards";
 import { useParams } from "next/navigation";
+import { assetTypes } from "@/app/types/auctions";
 
 export default function AuctionDetailsPage() {
   const params = useParams();
@@ -18,10 +18,13 @@ export default function AuctionDetailsPage() {
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [showMode, setShowMode] = useState("table");
   const [page, setPage] = useState(1);
+  const AuctionAssets: assetTypes[] | undefined = Assets.filter(
+    (a) => a.auctionId === auctionId,
+  );
 
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const totalPages = Math.ceil(Assets.length / itemsPerPage);
+  const totalPages = Math.ceil(AuctionAssets.length / itemsPerPage);
 
   if (!auction) {
     return (
@@ -134,12 +137,15 @@ export default function AuctionDetailsPage() {
               startIndex={startIndex}
               endIndex={endIndex}
               auctionId={auctionId}
+              AuctionAssets={AuctionAssets}
             />
           ) : (
             <AssetsCards
               startIndex={startIndex}
               endIndex={endIndex}
               auctionId={auctionId}
+              AuctionAssets={AuctionAssets}
+
             />
           )}
         </Grid>

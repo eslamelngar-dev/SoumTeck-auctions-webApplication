@@ -4,23 +4,22 @@ import Countdown from "../CountDown";
 import { AssetsProps } from "../../types/auctions";
 import { useState } from "react";
 import Link from "next/link";
-import { Assets } from "@/app/data/assets";
 import { Grid } from "@mui/material";
 
 export default function AssetsCards({
   startIndex,
   endIndex,
   auctionId,
+  AuctionAssets,
 }: AssetsProps) {
   const [closedAssets, setClosedAssets] = useState<Record<string, boolean>>({});
-
   const handleSetClosed = (assetId: string, value: boolean) => {
     setClosedAssets((prev) => ({ ...prev, [assetId]: value }));
   };
 
   return (
     <>
-      {Assets.slice(startIndex, endIndex).map((asset) => {
+      {AuctionAssets?.slice(startIndex, endIndex).map((asset) => {
         const isClosed = closedAssets[asset._id] || false;
 
         return (

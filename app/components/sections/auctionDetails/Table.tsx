@@ -5,15 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@mui/material";
-import { Assets } from "@/app/data/assets";
-import { AssetsProps,assetTypes } from "@/app/types/auctions";
+import { AssetsProps } from "@/app/types/auctions";
 
 export default function AssetsTable({
   startIndex,
   endIndex,
   auctionId,
+  AuctionAssets,
 }: AssetsProps) {
-  const AuctionAssets: assetTypes[] | undefined = Assets.filter((a) => a.auctionId === auctionId)
   const [clicked, setClicked] = useState(false);
   function handleButtonClick() {
     setClicked((prev) => !prev);

@@ -4,6 +4,7 @@ import Countdown from "../CountDown";
 import { auctionTypes } from "../../types/auctions";
 import { useState } from "react";
 import Link from "next/link";
+import { Assets } from "@/app/data/assets";
 
 export default function AuctionCard({
   _id,
@@ -14,11 +15,10 @@ export default function AuctionCard({
   logo,
   startDate,
   endDate,
-  assetsCount,
-  
 }: auctionTypes) {
   const [closed, setClosed] = useState(false);
-
+  const auctionAssets = Assets.filter((a) => a.auctionId === _id);
+  const assetsCount = auctionAssets.length;
   return (
     <>
       <div className="mt-5 block w-[20.18rem] max-h-150 p-3 rounded-xl shadow-2xl border border-gray-100">

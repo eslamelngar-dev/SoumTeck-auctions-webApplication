@@ -9,7 +9,6 @@ import Link from "next/link";
 
 export default function Auctions() {
   const [activeTab, setActiveTab] = useState<AuctionStatus>("active");
-
   const filteredAuctions = filterAuctions({
     auctions: auctions,
     status: activeTab,

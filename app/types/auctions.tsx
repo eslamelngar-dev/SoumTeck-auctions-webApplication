@@ -26,4 +26,5 @@ export interface AssetsProps {
   startIndex: number;
   endIndex: number;
   auctionId:string | undefined
+  AuctionAssets?:assetTypes[]
 }
