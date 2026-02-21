@@ -25,6 +25,15 @@ export interface assetTypes {
 export interface AssetsProps {
   startIndex: number;
   endIndex: number;
-  auctionId:string | undefined
-  AuctionAssets?:assetTypes[]
+  auctionId: string | undefined;
+  AuctionAssets?: assetTypes[];
+}
+
+export interface cardProps {
+  count: number;
+  pricePerMeter: number;
+  total: number;
+  tax: number;
+  fee: number;
+  onClose: () => void 
 }

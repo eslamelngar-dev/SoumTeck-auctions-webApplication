@@ -1,5 +1,6 @@
 "use client";
 import Countdown from "@/app/components/CountDown";
+import { BuyCard } from "@/app/components/UI/BuyCard";
 import { Assets } from "@/app/data/assets";
 import { auctions } from "@/app/data/auctions";
 import { Container } from "@mui/material";
@@ -18,6 +19,7 @@ export default function AssetDetailsPage() {
     (a) => a._id === assetId && a.auctionId === auctionId,
   );
   const [count, setCount] = useState(asset?.deposit ?? 0);
+  const [showCard, setShowCard] = useState(false);
 
   if (!asset || !auction) {
     return (
@@ -49,6 +51,16 @@ export default function AssetDetailsPage() {
         alignItems: "center",
       }}
     >
+      {showCard ? (
+        <BuyCard
+          count={count}
+          pricePerMeter={pricePerMeter}
+          total={total}
+          tax={tax}
+          fee={fee}
+          onClose={() => setShowCard(false)}
+        />
+      ) : null}
       {/* ===== Breadcrumb ===== */}
       <div className="w-full max-w-350 mx-auto">
         <div className="flex flex-col-reverse lg:flex-row justify-between items-center gap-4 lg:gap-8 py-4">
@@ -247,7 +259,10 @@ export default function AssetDetailsPage() {
               </div>
 
               {/* Bid Button */}
-              <button className="bg-[#171D5B] text-white rounded-lg py-3 sm:py-6 px-8 sm:px-16 flex gap-1 items-center cursor-pointer hover:bg-[#1a2068] transition duration-250 w-full sm:w-auto justify-center">
+              <button
+                onClick={() => (showCard ? setShowCard(false) : setShowCard(true))}
+                className="bg-[#171D5B] text-white rounded-lg py-3 sm:py-6 px-8 sm:px-16 flex gap-1 items-center cursor-pointer hover:bg-[#1a2068] transition duration-250 w-full sm:w-auto justify-center"
+              >
                 <GavelIcon fontSize="small" />
                 <p className="text-sm sm:text-base">اضف سومتك</p>
               </button>
