@@ -40,14 +40,12 @@ export default function AuctionsPage() {
         }}
         className="py-4 mt-4 sm:mt-6 md:mt-10"
       >
-        {/* العنوان */}
         <div className="flex w-full">
           <p className="primary-label text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-bold">
             المزادات
           </p>
         </div>
 
-        {/* البانر */}
         <div className="bg-[#F3F4F6] flex flex-col sm:flex-row w-full justify-between items-center py-4 sm:py-5 mt-2 px-4 sm:px-8 md:px-12 lg:px-[4.81rem] gap-4 sm:gap-0 rounded-lg">
           <div>
             <p className="text-[#171D5B] text-[1.2rem] sm:text-[1.5rem] md:text-[1.87rem] text-center sm:text-right">
@@ -82,7 +80,6 @@ export default function AuctionsPage() {
           </div>
         </div>
 
-        {/* التبويبات */}
         <div className="mt-4 sm:mt-6 md:mt-8 w-full flex justify-center">
           <ToggleGroup
             one="القائمة"
@@ -93,7 +90,6 @@ export default function AuctionsPage() {
           />
         </div>
 
-        {/* الكروت */}
         <Container maxWidth="xl" sx={{ px: { xs: 0, sm: 1, md: 2 } }}>
           <Grid container spacing={{ xs: 1, sm: 2 }}>
             {filteredAuctions.length === 0 ? (
@@ -146,7 +142,6 @@ export default function AuctionsPage() {
           </Grid>
         </Container>
 
-        {/* الصفحات */}
         <div className="mt-10 sm:mt-14 md:mt-20">
           <Pagination
             count={totalPages}

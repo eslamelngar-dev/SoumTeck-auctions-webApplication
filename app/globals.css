@@ -13,7 +13,6 @@ body {
   font-family: alexandria, sans-serif;
 }
 ::placeholder {
-  color: rgb(168, 168, 168);
   font-size: 0.8rem;
   font-weight: 300;
 }
