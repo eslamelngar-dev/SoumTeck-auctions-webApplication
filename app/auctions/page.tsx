@@ -33,37 +33,45 @@ export default function AuctionsPage() {
       <Container
         maxWidth="xl"
         sx={{
-          px: 4,
+          px: { xs: 2, sm: 3, md: 4 },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
-        className="py-4 mt-10"
+        className="py-4 mt-4 sm:mt-6 md:mt-10"
       >
-        <div className="flex justify w-full">
-          <p className=" primary-label text-[2.5rem] font-bold">المزادات</p>
+        {/* العنوان */}
+        <div className="flex w-full">
+          <p className="primary-label text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-bold">
+            المزادات
+          </p>
         </div>
-        <div className="bg-[#F3F4F6] flex w-screen justify-between py-5 mt-2">
-          <div className="px-[4.81rem]">
-            <p className="text-[#171D5B]  text-[1.87rem]">كل المزادات</p>
-            <div className="flex gap-1 text-[1.53rem]">
-              <GavelIcon sx={{ color: "#EEA820" }} />
-              <p className="text-[#171D5B] text-[1.53rem]">عدد المزادات </p>
-              <p className="text-[#171D5B] text-[1.53rem]">
+
+        {/* البانر */}
+        <div className="bg-[#F3F4F6] flex flex-col sm:flex-row w-full justify-between items-center py-4 sm:py-5 mt-2 px-4 sm:px-8 md:px-12 lg:px-[4.81rem] gap-4 sm:gap-0 rounded-lg">
+          <div>
+            <p className="text-[#171D5B] text-[1.2rem] sm:text-[1.5rem] md:text-[1.87rem] text-center sm:text-right">
+              كل المزادات
+            </p>
+            <div className="flex gap-1 items-center justify-center sm:justify-start text-[1rem] sm:text-[1.2rem] md:text-[1.53rem]">
+              <GavelIcon
+                sx={{ color: "#EEA820", fontSize: { xs: 20, md: 28 } }}
+              />
+              <p className="text-[#171D5B]">عدد المزادات </p>
+              <p className="text-[#171D5B]">
                 {activeTab === "active"
                   ? "القائمة"
                   : activeTab === "upcoming"
                     ? "القادمة"
                     : "المنتهية"}
               </p>
-
               <span className="text-[#DC5224]">
                 ({filteredAuctions.length})
               </span>
             </div>
           </div>
-          <div className="flex px-[4.81rem]">
-            <div className="relative w-[40%] sm:w-[45%] lg:w-62 h-12 sm:h-16 lg:h-22">
+          <div className="flex justify-center sm:justify-end">
+            <div className="relative w-32 h-10 sm:w-44 sm:h-14 md:w-52 md:h-16 lg:w-62 lg:h-22">
               <Image
                 src={companys}
                 alt="overlay1 hero img"
@@ -74,7 +82,8 @@ export default function AuctionsPage() {
           </div>
         </div>
 
-        <div className="mt-8 w-full flex justify-center">
+        {/* التبويبات */}
+        <div className="mt-4 sm:mt-6 md:mt-8 w-full flex justify-center">
           <ToggleGroup
             one="القائمة"
             two="القادمة"
@@ -83,8 +92,10 @@ export default function AuctionsPage() {
             onTabChange={handleTabChange}
           />
         </div>
-        <Container maxWidth="xl">
-          <Grid container spacing={2}>
+
+        {/* الكروت */}
+        <Container maxWidth="xl" sx={{ px: { xs: 0, sm: 1, md: 2 } }}>
+          <Grid container spacing={{ xs: 1, sm: 2 }}>
             {filteredAuctions.length === 0 ? (
               <Grid
                 size={12}
@@ -92,9 +103,9 @@ export default function AuctionsPage() {
                   textAlign: "center",
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "5rem",
+                  marginTop: { xs: "2rem", md: "5rem" },
                   color: "gray",
-                  padding: "2rem",
+                  padding: { xs: "1rem", md: "2rem" },
                 }}
               >
                 <p>لا يوجد مزادات </p>
@@ -135,19 +146,24 @@ export default function AuctionsPage() {
           </Grid>
         </Container>
 
-        <div className="mt-20">
+        {/* الصفحات */}
+        <div className="mt-10 sm:mt-14 md:mt-20">
           <Pagination
             count={totalPages}
             page={page}
-            onChange={(event, value) => {
+            onChange={(_, value) => {
               setPage(value);
               window.scrollTo({ top: 200, behavior: "smooth" });
             }}
             shape="rounded"
             dir="ltr"
+            size="small"
             sx={{
               "& .MuiPaginationItem-root": {
                 color: "#667085",
+                fontSize: { xs: "0.75rem", sm: "0.875rem", md: "1rem" },
+                minWidth: { xs: 28, sm: 32, md: 36 },
+                height: { xs: 28, sm: 32, md: 36 },
                 "&:hover": {
                   backgroundColor: "#eee",
                 },
