@@ -13,10 +13,20 @@ export default function AssetsTable({
   auctionId,
   AuctionAssets,
 }: AssetsProps) {
-  const [clicked, setClicked] = useState(false);
-  function handleButtonClick() {
-    setClicked((prev) => !prev);
+  const [clickedIds, setClickedIds] = useState<Set<string>>(new Set());
+
+  function handleButtonClick(id: string) {
+    setClickedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
   }
+
   return (
     <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default w-full border-[#EAECF0]">
       <table className="w-full text-sm text-left rtl:text-right text-body min-w-225">
@@ -49,101 +59,98 @@ export default function AssetsTable({
           </tr>
         </thead>
         <tbody>
-          {AuctionAssets?.slice(startIndex, endIndex).map((asset) => (
-            <tr key={asset._id} className="border border-[#EAECF0]">
-              <th
-                scope="row"
-                className="px-4 xl:px-6 py-4 font-medium text-heading whitespace-nowrap"
-              >
-                <Button
-                  variant="contained"
-                  onClick={handleButtonClick}
-                  sx={
-                    clicked
-                      ? {
-                          gap: 0.8,
-                          backgroundColor: "#5fcc00",
-                          fontWeight: 800,
-                          fontSize: { lg: "0.75rem", xl: "0.875rem" },
-                        }
-                      : {
-                          gap: 0.8,
-                          backgroundColor: "#171D5B",
-                          fontWeight: 800,
-                          fontSize: { lg: "0.75rem", xl: "0.875rem" },
-                        }
-                  }
-                  startIcon={
-                    clicked ? (
-                      <CheckIcon sx={{ ml: 0.5, mr: -0.5 }} />
-                    ) : (
-                      <AddIcon sx={{ ml: 0.5, mr: -0.5 }} />
-                    )
-                  }
+          {AuctionAssets?.slice(startIndex, endIndex).map((asset) => {
+            const isClicked = clickedIds.has(asset._id);
+            return (
+              <tr key={asset._id} className="border border-[#EAECF0]">
+                <th
+                  scope="row"
+                  className="px-4 xl:px-6 py-4 font-medium text-heading whitespace-nowrap"
                 >
-                  سجل في المزاد
-                </Button>
-              </th>
-              <td className="pr-3 pl-1 py-4">
-                <div className="flex gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
-                    <Image
-                      src={asset.image}
-                      alt={asset.name}
-                      fill
-                      className="object-cover"
-                    />
+                  <Button
+                    variant="contained"
+                    onClick={() => handleButtonClick(asset._id)}
+                    sx={{
+                      gap: 0.8,
+                      backgroundColor: isClicked ? "#5fcc00" : "#171D5B",
+                      fontWeight: 800,
+                      fontSize: { lg: "0.75rem", xl: "0.875rem" },
+                      "&:hover": {
+                        backgroundColor: isClicked ? "#4db300" : "#0f1340",
+                      },
+                    }}
+                    startIcon={
+                      isClicked ? (
+                        <CheckIcon sx={{ ml: 0.5, mr: -0.5 }} />
+                      ) : (
+                        <AddIcon sx={{ ml: 0.5, mr: -0.5 }} />
+                      )
+                    }
+                  >
+                    سجل في المزاد
+                  </Button>
+                </th>
+                <td className="pr-3 pl-1 py-4">
+                  <div className="flex gap-3">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
+                      <Image
+                        src={asset.image}
+                        alt={asset.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="text-sm">
+                      <p className="text-nowrap">{asset.name}</p>
+                      <span className="text-[#4B5563] text-xs">
+                        {asset.location}
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-sm">
-                    <p className="text-nowrap">{asset.name}</p>
-                    <span className="text-[#4B5563] text-xs">
-                      {asset.location}
-                    </span>
+                </td>
+                <td className="px-3 py-8 gap-1 flex flex-col justify-center items-center">
+                  <div>
+                    <p className="text-[#DC5224] font-bold">
+                      {asset.bidPrice.toLocaleString()} ر.س
+                    </p>
+                    <p>(300 ر.س) للمتر</p>
                   </div>
-                </div>
-              </td>
-              <td className="px-3 py-8 gap-1 flex flex-col justify-center items-center">
-                <div>
-                  <p className="text-[#DC5224] font-bold">
-                    {asset.bidPrice.toLocaleString()} ر.س
-                  </p>
-                  <p>(300 ر.س) للمتر</p>
-                </div>
-              </td>
-              <td className="px-3 py-4">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="font-bold">{asset.space}</p>
-                  <span>م²</span>
-                </div>
-              </td>
-              <td className="px-3 py-4">
-                <div className="flex justify-center items-center gap-1">
-                  <p className="font-bold">{asset.deposit}</p>
-                  <span>ر.س</span>
-                </div>
-              </td>
-              <td className="px-2 py-4">
-                <div className="flex gap-1 justify-center items-center">
-                  <p className="font-bold">({asset.bidsCount})</p>
-                  <span>مزايد</span>
-                </div>
-              </td>
-              <td className="px-4 xl:px-8 py-4 max-w-73">
-                <Countdown
-                  startDate={asset.startDate}
-                  endDate={asset.endDate}
-                  setClosed={() => false}
-                />
-              </td>
-              <td className="px-3 xl:px-5 py-4">
-                <Link href={`/auctions/${auctionId}/assets/${asset._id}`}>
-                  <button className="bg-[#EEA820] text-white rounded-md text-[0.75rem] xl:text-[0.81rem] w-32 xl:w-40 h-10 xl:h-12 cursor-pointer hover:bg-[#d99518] transition">
-                    تفاصيل المزاد
-                  </button>
-                </Link>
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td className="px-3 py-4">
+                  <div className="flex justify-center items-center gap-1">
+                    <p className="font-bold">{asset.space}</p>
+                    <span>م²</span>
+                  </div>
+                </td>
+                <td className="px-3 py-4">
+                  <div className="flex justify-center items-center gap-1">
+                    <p className="font-bold">{asset.deposit}</p>
+                    <span>ر.س</span>
+                  </div>
+                </td>
+                <td className="px-2 py-4">
+                  <div className="flex gap-1 justify-center items-center">
+                    <p className="font-bold">({asset.bidsCount})</p>
+                    <span>مزايد</span>
+                  </div>
+                </td>
+                <td className="px-4 xl:px-8 py-4 max-w-73">
+                  <Countdown
+                    startDate={asset.startDate}
+                    endDate={asset.endDate}
+                    setClosed={() => false}
+                  />
+                </td>
+                <td className="px-3 xl:px-5 py-4">
+                  <Link href={`/auctions/${auctionId}/assets/${asset._id}`}>
+                    <button className="bg-[#EEA820] text-white rounded-md text-[0.75rem] xl:text-[0.81rem] w-32 xl:w-40 h-10 xl:h-12 cursor-pointer hover:bg-[#d99518] transition">
+                      تفاصيل المزاد
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
